@@ -10,10 +10,10 @@ public class MousePosition : MonoBehaviour
     {
         Vector2 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Vector3 pos = transform.position;
-        pos = MousePos;
 
-        pos = transform.position;
+        transform.position = MousePos;
+
+        MousePos = transform.position;
 
 
     }

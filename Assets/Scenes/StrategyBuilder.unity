@@ -235,8 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57133915aa82fd4aaef963c20b4bb37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sr: {fileID: 0}
-  prefab: {fileID: 1998290440569571655, guid: 4e17143d0adb4e14babb4df5437c47ea, type: 3}
+  prefab: {fileID: 1175144041126828828, guid: 4e17143d0adb4e14babb4df5437c47ea, type: 3}
   SpawnLocation: {fileID: 1699648617}
 --- !u!4 &967063030
 Transform:
