@@ -49,7 +49,7 @@ public class KitClock : MonoBehaviour
         OnTheHour.Invoke(hour);
     }
 
-    public void StopeTheClock()
+    public void StopTheClock()
     {
         if (clockisRunning != null)
         {
