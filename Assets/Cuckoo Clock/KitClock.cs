@@ -19,7 +19,7 @@ public class KitClock : MonoBehaviour
 
     void Start()
     {
-        //clockisRunning = StartCoroutine(MoveTheClock());
+        clockisRunning = StartCoroutine(MoveTheClock());
     }
 
     IEnumerator MoveTheClock()
