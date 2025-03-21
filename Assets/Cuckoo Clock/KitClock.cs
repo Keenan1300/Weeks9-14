@@ -7,7 +7,7 @@ public class KitClock : MonoBehaviour
 {
     public Transform hourHand;
     public Transform minuteHand;
-    public float timeAnHourTakes = 5;
+    public float timeAnHourTakes = 1;
 
     public float t;
     public int hour = 0;

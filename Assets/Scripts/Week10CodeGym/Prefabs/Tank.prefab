@@ -1,5 +1,39 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &58927982450780492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1017418567616527476}
+  m_Layer: 0
+  m_Name: TankBuilder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1017418567616527476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58927982450780492}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4476229144533291865}
+  - {fileID: 4652031479785843441}
+  - {fileID: 3668903483050594878}
+  m_Father: {fileID: 7364204971770645353}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &135744380289411108
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hourHand: {fileID: 1645725104357426417}
   minuteHand: {fileID: 4907136749646467627}
-  timeAnHourTakes: 5
+  timeAnHourTakes: 3
   t: 0
   hour: 0
   OnTheHour:
@@ -193,6 +227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7364204971770645353}
+  - component: {fileID: 8407887238007105793}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -213,12 +248,31 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4476229144533291865}
-  - {fileID: 4652031479785843441}
-  - {fileID: 3668903483050594878}
+  - {fileID: 1017418567616527476}
   - {fileID: 3970804264671898863}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8407887238007105793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175144041126828828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa71fae3c1524e42bedbd653bf4665c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FirstTankPiece: {fileID: 8433969992514821222}
+  SecondTankPiece: {fileID: 8411886913049748452}
+  ThirdTankPiece: {fileID: 8100676425857550548}
+  constructiontime: 1
+  t: 0
+  hour: 0
+  OnTheHour:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3938629438443089818
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,7 +529,7 @@ Transform:
   m_LocalScale: {x: 6.2687483, y: 6.2687483, z: 6.2687483}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7364204971770645353}
+  m_Father: {fileID: 1017418567616527476}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6719044689981566096
 SpriteRenderer:
@@ -517,7 +571,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: ef4bf6ca98c78c145ab43619007d593f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -559,7 +613,7 @@ Transform:
   m_LocalScale: {x: 5.2338, y: 5.2338, z: 5.2338}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7364204971770645353}
+  m_Father: {fileID: 1017418567616527476}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4701027723689600334
 SpriteRenderer:
@@ -601,7 +655,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: bd26b83d90951984abdb3415076647ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -643,7 +697,7 @@ Transform:
   m_LocalScale: {x: 4.7076902, y: 4.7076902, z: 4.7076902}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7364204971770645353}
+  m_Father: {fileID: 1017418567616527476}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1327573658003162738
 SpriteRenderer:
@@ -685,7 +739,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 79a48fb25ae196442a195c5140a534ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
