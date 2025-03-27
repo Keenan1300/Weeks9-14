@@ -68,7 +68,7 @@ public class Heartmonitor : MonoBehaviour
 
 
 
-        pos.y = Pulse.Evaluate(C) * 5;
+        pos.y = Pulse.Evaluate(C) * 8;
         pos.y -= 4;
 
         transform.position = pos;
