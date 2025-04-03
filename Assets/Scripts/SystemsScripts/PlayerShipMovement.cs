@@ -89,10 +89,14 @@ public class PlayerShipMovement : MonoBehaviour
         }
         
         transform.position = pos;
-    
-    
-      //Turning towards mouse
 
+
+        //Turning towards mouse
+        Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouse.z = 0;
+        Vector2 direction = mouse - transform.position;
+        
+        transform.up = direction;
 
     
     }
