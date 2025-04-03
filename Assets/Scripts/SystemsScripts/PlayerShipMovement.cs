@@ -20,7 +20,7 @@ public class PlayerShipMovement : MonoBehaviour
     //Boost time duration
     public float B;
 
-    float Speed = 0.03f;
+    float Speed = 0.015f;
 
 
 
