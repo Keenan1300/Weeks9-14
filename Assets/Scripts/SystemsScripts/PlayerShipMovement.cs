@@ -18,10 +18,14 @@ public class PlayerShipMovement : MonoBehaviour
     public float R;
 
     //Boost time duration
-    public float B;
+    float B;
 
+    //Default Speed of player ship
     float Speed = 0.015f;
 
+    //Initialize coroutine for 
+    Coroutine BoosterIsBoosting;
+    IEnumerator Boosted;
 
 
 
@@ -30,8 +34,9 @@ public class PlayerShipMovement : MonoBehaviour
     {
         HP = 100;
         Ammo = 12;
-        Boost = 0;
-
+        Boost = 10;
+        B = 10;
+        BoosterIsBoosting = null;
     }
 
     // Update is called once per frame
@@ -40,7 +45,16 @@ public class PlayerShipMovement : MonoBehaviour
         Vector3 pos = transform.position;
         Vector3 squareinscreen = Camera.main.WorldToScreenPoint(pos);
 
-        
+
+        //Keep speed at a moderate rate
+        if (Speed > 0.015f)
+        {
+            Speed -= 0.01f;
+        }
+
+
+        //Establish boundaries so player cant fly off the screen
+        //Horizontal and Vertical boundaries
         if (squareinscreen.x < 0  )
         {
             pos = new Vector3(pos.x+0.5f,pos.y, pos.z);
@@ -64,6 +78,7 @@ public class PlayerShipMovement : MonoBehaviour
         }
 
 
+        //Use WASD to move 
         //check movement
         if (Input.GetKey(KeyCode.A))
         {
@@ -87,23 +102,61 @@ public class PlayerShipMovement : MonoBehaviour
         {
             pos.y -= Speed;
         }
-        
-        transform.position = pos;
 
 
-        //Turning towards mouse
+        //Check if boost button -left shift- is used
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            print("Phase 1 of 3 is good");
+            if (Boost > 1)
+            {
+                if (BoosterIsBoosting == null)
+                {
+                    BoosterIsBoosting = StartCoroutine(SpeedShip());
+                }
+                else
+                {
+                    BoosterIsBoosting = null;
+                }
+            }
+           
+        }
+            transform.position = pos;
+
+
+        //Turn ship towards mouse
         Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouse.z = 0;
         Vector2 direction = mouse - transform.position;
-        
         transform.up = direction;
 
     
     }
 
 
+    IEnumerator SpeedShip()
+    {
+            print("Phase 2 of 3 is good");
+            B = 10;
+            Boosted = Accelerate();
+            yield return StartCoroutine(Boosted);
+            yield return null;
+    }
 
 
+    IEnumerator Accelerate()
+    {
+        print("Phase 3 of 3 is good!!");
+        
+        while (B > 1 && Boost < 1)
+        {
+            Speed += 0.05f;
+            B -= 1;
+            Boost -= 1;
+        }
+        yield return null;
+    }
 
     void Hit() 
     {
@@ -115,9 +168,5 @@ public class PlayerShipMovement : MonoBehaviour
         Ammo--;
     }
 
-    void Booster()
-    {
-
-    }
 
 }
