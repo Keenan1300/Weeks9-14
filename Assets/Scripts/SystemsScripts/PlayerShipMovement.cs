@@ -47,12 +47,21 @@ public class PlayerShipMovement : MonoBehaviour
         Vector3 pos = transform.position;
         Vector3 squareinscreen = Camera.main.WorldToScreenPoint(pos);
 
-
         //Keep speed at a moderate rate
         if (Speed > 0.015f)
         {
             Speed -= 0.01f;
         }
+
+
+        //Turn ship towards mouse
+        Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouse.z = 0;
+        Vector2 direction = mouse - transform.position;
+        Quaternion ShipRot = transform.rotation;
+        transform.up = direction;
+
+        Vector3 BoostDynamic = mouse - pos;
 
 
         //Establish boundaries so player cant fly off the screen
@@ -111,47 +120,34 @@ public class PlayerShipMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             print("Phase 1 of 3 is good");
-            if (Boost > 1)
-            {
-                if (BoosterIsBoosting == null)
+         
+            if (BoosterIsBoosting == null)
                 {
                     BoosterIsBoosting = StartCoroutine(SpeedShip());
                 }
-                else
-                {
+            else
+            {
                     BoosterIsBoosting = null;
-                }
             }
+            
            
         }
-        else
+
+        if (B < 10)
         {
-            //Boosted = false;
+            B++;
+            Boost++;
+            print(B);
         }
 
-
-        //Turn ship towards mouse
-        Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mouse.z = 0;
-        Vector2 direction = mouse - transform.position;
-        transform.up = direction;
-
-        Vector3 BoostDynamic = mouse - pos;
-
-
-        if (boosting == false) 
 
         //Move ship position
         transform.position = pos;
-        else 
-        if (boosting == true)
-        {
-            transform.position = pos*2;
-        }
-
+       
     }
 
-
+    //Need this coroutine to progressivley move the ship in the direction its pointed in, but only until a certain amount of times
+    //How can i do this through coroutines?
     IEnumerator SpeedShip()
     {
             print("Phase 2 of 3 is good");
@@ -166,15 +162,15 @@ public class PlayerShipMovement : MonoBehaviour
         print("Phase 3 of 3 is good!!");
         Vector3 pos = transform.position;
 
-        while (B > 1 && Boost < 1)
+        while (B > 1 && Boost > 1)
         {
             print("Phase 4 of 3 is good!!");
             Speed += 0.5f;
             B -= 1;
             Boost -= 1;
-            pos = new Vector3(pos.x, pos.y + 0.5f, pos.z);
+            pos = new Vector3(pos.x, pos.y+0.5f, pos.z);
             boosting = true;
-            transform.position = pos.normalized;
+            transform.position = pos;
         }
         yield return null;
     }
