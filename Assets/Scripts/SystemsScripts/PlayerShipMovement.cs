@@ -122,6 +122,10 @@ public class PlayerShipMovement : MonoBehaviour
             }
            
         }
+        else
+        {
+            //Boosted = false;
+        }
             transform.position = pos;
 
 
@@ -151,7 +155,13 @@ public class PlayerShipMovement : MonoBehaviour
         
         while (B > 1 && Boost < 1)
         {
-            Speed += 0.05f;
+            print("Phase 4 of 3 is good!!");
+            Vector3 pos = transform.position;
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 BoostDynamic = mousePos - pos;  
+            
+            transform.position = BoostDynamic - pos;
+            Speed += 5f;
             B -= 1;
             Boost -= 1;
         }
