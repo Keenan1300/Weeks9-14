@@ -1,11 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using static UnityEditor.PlayerSettings;
 
 public class PlayerShipMovement : MonoBehaviour
 {
+
+
+    public UnityEvent<float> ConsumeBoost;
+    public UnityEvent<float> RefillBoost;
+    public UnityEvent<float> ConsumeHealth;
+    public UnityEvent<float> RefillHealth;
+    public UnityEvent<float> ConsumeAmmo;
+    public UnityEvent<float> RefillAmmo;
+
 
     //Player position data
     float Ppos;
@@ -23,13 +34,13 @@ public class PlayerShipMovement : MonoBehaviour
 
     //Default Speed of player ship
     float Speed = 0.015f;
+    float rotspeed = 0.05f;
+
 
     //Initialize coroutine for 
     Coroutine BoosterIsBoosting;
     IEnumerator Boosted;
 
-    //test---------
-    bool boosting;
 
     // Start is called before the first frame update
     void Start()
@@ -48,17 +59,16 @@ public class PlayerShipMovement : MonoBehaviour
         Vector3 squareinscreen = Camera.main.WorldToScreenPoint(pos);
 
         //Keep speed at a moderate rate
-        if (Speed > 0.015f)
+        if (Speed < 0.015f)
         {
-            Speed -= 0.01f;
+            Speed += 0.01f;
         }
 
 
         //Turn ship towards mouse
+       
         Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mouse.z = 0;
         Vector2 direction = mouse - transform.position;
-        Quaternion ShipRot = transform.rotation;
         transform.up = direction;
 
         Vector3 BoostDynamic = mouse - pos;
@@ -87,6 +97,13 @@ public class PlayerShipMovement : MonoBehaviour
         {
             pos = new Vector3(pos.x, pos.y-0.5f, pos.z);
         }
+
+        if (pos.x < -11 || pos.x > 11 || pos.y < -6 || pos.y > 6)
+        {
+            pos = new Vector3(0, 0, 0);
+
+        }
+
 
 
         //Use WASD to move 
@@ -125,19 +142,16 @@ public class PlayerShipMovement : MonoBehaviour
                 {
                     BoosterIsBoosting = StartCoroutine(SpeedShip());
                 }
-            else
-            {
-                    BoosterIsBoosting = null;
-            }
             
            
         }
 
-        if (B < 10)
+        if (B < 15 && Boost < 15 && BoosterIsBoosting == null)
         {
-            B++;
-            Boost++;
+            B += Time.deltaTime*3;
+            Boost += Time.deltaTime * 3;
             print(B);
+            RefillBoost.Invoke(1);
         }
 
 
@@ -152,27 +166,40 @@ public class PlayerShipMovement : MonoBehaviour
     {
             print("Phase 2 of 3 is good");
             Boosted = Accelerate();
+            Speed = 0;
             yield return StartCoroutine(Boosted);
-            yield return null;
+            BoosterIsBoosting = null;
     }
 
 
     IEnumerator Accelerate()
     {
         print("Phase 3 of 3 is good!!");
+        Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouse.z = 0;
         Vector3 pos = transform.position;
+        Vector3 shift = pos - mouse;
+
 
         while (B > 1 && Boost > 1)
         {
             print("Phase 4 of 3 is good!!");
-            Speed += 0.5f;
             B -= 1;
             Boost -= 1;
-            pos = new Vector3(pos.x, pos.y+0.5f, pos.z);
-            boosting = true;
-            transform.position = pos;
+            ConsumeBoost.Invoke(1);
+            transform.position -= (shift * Time.deltaTime*30);
+
+
+            if (pos.x < -9 || pos.x > 9 || pos.y < -5 || pos.y > 5)
+            {
+                pos = new Vector3(0, 0, 0);
+
+            }
+            
+            yield return null;
         }
-        yield return null;
+        
+
     }
     void Hit()
     {
