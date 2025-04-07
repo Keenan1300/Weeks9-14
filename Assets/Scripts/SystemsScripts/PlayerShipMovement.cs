@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class PlayerShipMovement : MonoBehaviour
 {
@@ -27,7 +28,8 @@ public class PlayerShipMovement : MonoBehaviour
     Coroutine BoosterIsBoosting;
     IEnumerator Boosted;
 
-
+    //test---------
+    bool boosting;
 
     // Start is called before the first frame update
     void Start()
@@ -126,7 +128,6 @@ public class PlayerShipMovement : MonoBehaviour
         {
             //Boosted = false;
         }
-            transform.position = pos;
 
 
         //Turn ship towards mouse
@@ -135,14 +136,25 @@ public class PlayerShipMovement : MonoBehaviour
         Vector2 direction = mouse - transform.position;
         transform.up = direction;
 
-    
+        Vector3 BoostDynamic = mouse - pos;
+
+
+        if (boosting == false) 
+
+        //Move ship position
+        transform.position = pos;
+        else 
+        if (boosting == true)
+        {
+            transform.position = pos*2;
+        }
+
     }
 
 
     IEnumerator SpeedShip()
     {
             print("Phase 2 of 3 is good");
-            B = 10;
             Boosted = Accelerate();
             yield return StartCoroutine(Boosted);
             yield return null;
@@ -152,23 +164,21 @@ public class PlayerShipMovement : MonoBehaviour
     IEnumerator Accelerate()
     {
         print("Phase 3 of 3 is good!!");
-        
+        Vector3 pos = transform.position;
+
         while (B > 1 && Boost < 1)
         {
             print("Phase 4 of 3 is good!!");
-            Vector3 pos = transform.position;
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 BoostDynamic = mousePos - pos;  
-            
-            transform.position = BoostDynamic - pos;
-            Speed += 5f;
+            Speed += 0.5f;
             B -= 1;
             Boost -= 1;
+            pos = new Vector3(pos.x, pos.y + 0.5f, pos.z);
+            boosting = true;
+            transform.position = pos.normalized;
         }
         yield return null;
     }
-
-    void Hit() 
+    void Hit()
     {
         HP--;
     }
