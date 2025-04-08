@@ -9,7 +9,12 @@ using static UnityEditor.PlayerSettings;
 public class PlayerShipMovement : MonoBehaviour
 {
 
+    //Store player starship booster sounds
+    public AudioSource boost;
+    public AudioClip playboost;
 
+    //Add unity events for each stat the player has. These will increase or decrease the 
+    //values of each stat when invoked
     public UnityEvent<float> ConsumeBoost;
     public UnityEvent<float> RefillBoost;
     public UnityEvent<float> ConsumeHealth;
@@ -98,7 +103,7 @@ public class PlayerShipMovement : MonoBehaviour
             pos = new Vector3(pos.x, pos.y-0.5f, pos.z);
         }
 
-        if (pos.x < -11 || pos.x > 11 || pos.y < -6 || pos.y > 6)
+        if (pos.x < -14 || pos.x > 14 || pos.y < -7 || pos.y > 7)
         {
             pos = new Vector3(0, 0, 0);
 
@@ -137,7 +142,7 @@ public class PlayerShipMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             print("Phase 1 of 3 is good");
-         
+
             if (BoosterIsBoosting == null)
                 {
                     BoosterIsBoosting = StartCoroutine(SpeedShip());
@@ -160,10 +165,11 @@ public class PlayerShipMovement : MonoBehaviour
        
     }
 
-    //Need this coroutine to progressivley move the ship in the direction its pointed in, but only until a certain amount of times
-    //How can i do this through coroutines?
+    // Coroutine finds the vector between the player mouse and the ship itself, and 
+    // moves the ship towards the mouse rapidly to make it a appear like its boosting
     IEnumerator SpeedShip()
     {
+
             print("Phase 2 of 3 is good");
             Boosted = Accelerate();
             Speed = 0;
@@ -174,6 +180,14 @@ public class PlayerShipMovement : MonoBehaviour
 
     IEnumerator Accelerate()
     {
+        //play audio for boost effect    
+        if (boost.isPlaying == false)
+        {
+            boost.clip = playboost;
+            boost.Play();
+        }
+        
+
         print("Phase 3 of 3 is good!!");
         Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouse.z = 0;
@@ -187,10 +201,10 @@ public class PlayerShipMovement : MonoBehaviour
             B -= 1;
             Boost -= 1;
             ConsumeBoost.Invoke(1);
-            transform.position -= (shift * Time.deltaTime*30);
+            transform.position -= (shift * Time.deltaTime* (Boost*10));
 
 
-            if (pos.x < -9 || pos.x > 9 || pos.y < -5 || pos.y > 5)
+            if (pos.x < -13 || pos.x > 13 || pos.y < -6 || pos.y > 6)
             {
                 pos = new Vector3(0, 0, 0);
 
@@ -210,6 +224,5 @@ public class PlayerShipMovement : MonoBehaviour
     {
         Ammo--;
     }
-
 
 }
