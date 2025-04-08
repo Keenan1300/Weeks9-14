@@ -5,16 +5,20 @@ using UnityEngine;
 public class UFOmanager : MonoBehaviour
 {
     public GameObject UFO;
-    public GameObject Detection;
+    public GameObject GunDetection;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        //Collect enemy script from the UFO object
         EnemyScript newenemyscript = UFO.GetComponent<EnemyScript>();
-        UFODETECTION newdetectscript = Detection.GetComponent<UFODETECTION>();
 
-        newenemyscript.SeekPlayer.AddListener(newdetectscript.checkbounds);
+        //Collect Gun range etection script, used for measuring weapon range from the player
+        UFODETECTION newgundetectscript = GunDetection.GetComponent<UFODETECTION>();
+
+        //Make is so that if the UFO starts looking for the player, the gun detection script will be included in that conversation.
+        //Once the enemy looks for the player, the gunscript will also look
+        newenemyscript.SeekPlayer.AddListener(newgundetectscript.checkbounds);
 
    
     }

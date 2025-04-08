@@ -9,9 +9,11 @@ using static UnityEditor.PlayerSettings;
 public class PlayerShipMovement : MonoBehaviour
 {
 
+
     //Store player starship booster sounds
     public AudioSource boost;
     public AudioClip playboost;
+
 
     //Add unity events for each stat the player has. These will increase or decrease the 
     //values of each stat when invoked
@@ -22,6 +24,8 @@ public class PlayerShipMovement : MonoBehaviour
     public UnityEvent<float> ConsumeAmmo;
     public UnityEvent<float> RefillAmmo;
 
+
+    public float pos;
 
     //Player position data
     float Ppos;
@@ -155,7 +159,7 @@ public class PlayerShipMovement : MonoBehaviour
         {
             B += Time.deltaTime*3;
             Boost += Time.deltaTime * 3;
-            print(B);
+            //print(B);
             RefillBoost.Invoke(1);
         }
 

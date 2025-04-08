@@ -34,16 +34,21 @@ public class EnemyScript : MonoBehaviour
 
         if (foundplayer == false)
         {
-            search();
+            Vector3 rot = transform.eulerAngles;
+            rot.z += Time.deltaTime * 100;
+            transform.eulerAngles = rot;
         }
 
+        //Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Vector2 direction = mouse - transform.position;
+
+        //Vector3 UFOrot = transform.up;
+        //Vector2 UFOpointer = transform.position;
+        //UFOpointer.x += Time.deltaTime*0.004f;
+        //transform.up = UFOpointer;
 
 
-        Vector3 UFOpos = transform.position;
-        //Vector3 UFOrot = transform.eulerAngles;
-        Vector3 UFOrot = transform.up;
-        transform.eulerAngles = UFOrot;
-        transform.position = UFOpos;
+        
     }
 
 
