@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7970296305277458511}
+  - component: {fileID: 1776735833735292687}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -31,6 +32,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5693925889669109497}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1776735833735292687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736299480625212856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f05b5f60b2f7e5e439b8e25fbea9e1dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6706608661692113321
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,6 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6457741901216005514}
   - component: {fileID: 2427470248721423586}
+  - component: {fileID: 5647069226592777485}
   m_Layer: 0
   m_Name: Detection
   m_TagString: Untagged
@@ -115,6 +129,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5647069226592777485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6706608661692113321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b1dc7475d7755d4b8fa4280e1a8f0a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8859519968127296744
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,3 +242,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 5
   GunCoolDown: 3
+  foundplayer: 0
