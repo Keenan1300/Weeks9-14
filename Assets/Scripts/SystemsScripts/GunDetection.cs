@@ -7,7 +7,11 @@ public class GunDetection : MonoBehaviour
 {
     SpriteRenderer sr;
     
+    //Define the range where the UFO will shoot at the player
     public GameObject Seeker;
+
+    //allow access to main enemy script for player data
+    public EnemyScript enemyScript;
     public Transform playerlocation;
 
 
@@ -22,6 +26,7 @@ public class GunDetection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerlocation = enemyScript.GetComponent<EnemyScript>().player;
         checkbounds();
     }
 

@@ -7,6 +7,10 @@ using UnityEngine.Events;
 
 public class EnemyScript : MonoBehaviour
 {
+
+    //Grab access to main spawner script, allowing accessible data
+    public Spawner Spawner;
+
     //Stores bullet object
     public GameObject bullets;
 
@@ -33,6 +37,7 @@ public class EnemyScript : MonoBehaviour
     void Start()
     {
         interval = 0;
+        bullets = Spawner.GetComponent<Spawner>().bullets;
     }
 
     // Update is called once per frame
