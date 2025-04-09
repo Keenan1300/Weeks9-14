@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GunDetection : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class GunDetection : MonoBehaviour
     
     public GameObject Seeker;
     public Transform playerlocation;
+
+
+    public UnityEvent<bool> Fire;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +22,7 @@ public class GunDetection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        checkbounds();
     }
 
     public void checkbounds()
@@ -35,7 +39,7 @@ public class GunDetection : MonoBehaviour
             print("found em and gonna shoot this mofo");
             firebullets();
         }
-        else
+        else if (!playerinsight)
         {
             print("Gunslostem");
         }
@@ -44,7 +48,7 @@ public class GunDetection : MonoBehaviour
 
     public void firebullets()
     {
-        //instantiate()
+        Fire.Invoke(true);
     }
 
 

@@ -76,7 +76,7 @@ public class PlayerShipMovement : MonoBehaviour
         Vector3 squareinscreen = Camera.main.WorldToScreenPoint(pos);
 
         //Keep speed at a moderate rate
-        if (Speed < 0.07f)
+        if (Speed < 0.03f)
         {
             Speed += 0.01f;
         }

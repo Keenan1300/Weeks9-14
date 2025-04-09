@@ -9,9 +9,6 @@ public class BulletAction : MonoBehaviour
     public AudioSource laser;
     public AudioClip lasersound;
 
-    public PlayerShipMovement shipdata;
-    public Transform shiploc;
-
     // Start is called before the first frame update
     void Start()
     {

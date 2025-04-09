@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UFODETECTION : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class UFODETECTION : MonoBehaviour
     public PlayerShipMovement r;
     public float h;
 
-    public bool foundplayer;
+    public UnityEvent<bool> playerfound;
 
     // Start is called before the first frame update
     void Start()
@@ -33,8 +34,8 @@ public class UFODETECTION : MonoBehaviour
         if (playerinsight)
         {
             print("found em!!");
-            //Seeker.invoke(1);
-            foundplayer = false;
+            playerfound.Invoke(true);
+           
         }
         else
         {
