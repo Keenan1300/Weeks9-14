@@ -12,6 +12,8 @@ public class EnemyBullets : MonoBehaviour
     //collect player location data
     public Transform player;
 
+    EnemyScript EScriptdata;
+
 
 
     // Start is called before the first frame update
@@ -23,6 +25,7 @@ public class EnemyBullets : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //Read where the player is
         Vector3 ppos = player.transform.position;
 
@@ -46,7 +49,7 @@ public class EnemyBullets : MonoBehaviour
 
         if (playerhit)
         {
-
+            Destroy(gameObject);
 
         }
 
