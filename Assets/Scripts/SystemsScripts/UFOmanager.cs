@@ -10,6 +10,12 @@ public class UFOmanager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+   
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         //Collect enemy script from the UFO object
         EnemyScript newenemyscript = UFO.GetComponent<EnemyScript>();
 
@@ -18,16 +24,7 @@ public class UFOmanager : MonoBehaviour
 
         //Make is so that if the UFO starts looking for the player, the gun detection script will be included in that conversation.
         //Once the enemy looks for the player, the gunscript will also look
-        newenemyscript.SeekPlayer.AddListener(newgundetectscript.checkbounds);
-
-   
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //UFO.search.Addlistener(Detection.checkbounds);
-
+        //newenemyscript.SeekPlayer.AddListener(newgundetectscript.checkbounds);
     }
 
     public void alerted()

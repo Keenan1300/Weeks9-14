@@ -10,33 +10,36 @@ public class EnemyScript : MonoBehaviour
 
     public UnityEvent SeekPlayer;
 
+    public UFODETECTION detect;
 
     //UFO stats
     public float HP;
     public float GunCoolDown;
     
     //Booleans for player detection
-    public bool foundplayer;
+    public bool found;
 
     // Start is called before the first frame update
     void Start()
     {
-        foundplayer = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        found = detect.GetComponent<UFODETECTION>().foundplayer;
+
+        
+
         if (HP < 1) 
         {
         
         }
 
-        if (foundplayer == false)
+        if (found == false)
         {
-            Vector3 rot = transform.eulerAngles;
-            rot.z += Time.deltaTime * 100;
-            transform.eulerAngles = rot;
+            search();
         }
 
         //Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -47,17 +50,16 @@ public class EnemyScript : MonoBehaviour
         //UFOpointer.x += Time.deltaTime*0.004f;
         //transform.up = UFOpointer;
 
+        detect.foundplayer = found;
 
-        
     }
 
 
     public void search()
     {
-        Vector3 UFOrot = transform.up;
-        Vector3 UFOpos = transform.position;
-        UFOrot.z += 5;
-        transform.up = UFOrot;
+        Vector3 rot = transform.eulerAngles;
+        rot.z += Time.deltaTime * 100;
+        transform.eulerAngles = rot;
     }
 
 

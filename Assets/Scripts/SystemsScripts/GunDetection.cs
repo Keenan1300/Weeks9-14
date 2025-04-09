@@ -5,13 +5,13 @@ using UnityEngine;
 public class GunDetection : MonoBehaviour
 {
     SpriteRenderer sr;
-    GameObject collidingplayer;
-    GameObject Seeker;
+    
+    public GameObject Seeker;
+    public Transform playerlocation;
 
     // Start is called before the first frame update
     void Start()
     {
-        sr = GetComponent<SpriteRenderer>();
 
     }
 
@@ -23,10 +23,21 @@ public class GunDetection : MonoBehaviour
 
     public void checkbounds()
     {
-        if (sr.bounds.Contains(collidingplayer.transform.position))
+
+        sr = Seeker.GetComponent<SpriteRenderer>();
+
+        bool playerinsight = sr.bounds.Contains(playerlocation.transform.position);
+
+
+
+        if (playerinsight)
         {
             print("found em and gonna shoot this mofo");
             firebullets();
+        }
+        else
+        {
+            print("Gunslostem");
         }
     }
 

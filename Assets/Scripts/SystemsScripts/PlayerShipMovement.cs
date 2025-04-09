@@ -8,7 +8,8 @@ using static UnityEditor.PlayerSettings;
 
 public class PlayerShipMovement : MonoBehaviour
 {
-
+    //store bullets
+    public GameObject bullets;
 
     //Store player starship booster sounds
     public AudioSource boost;
@@ -38,6 +39,9 @@ public class PlayerShipMovement : MonoBehaviour
     //Reload times for firing mechanic
     public float R;
 
+    //Fire intervaltimes
+    public float interval;
+
     //Boost time duration
     float B;
 
@@ -54,6 +58,7 @@ public class PlayerShipMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        interval = 0;
         HP = 100;
         Ammo = 12;
         Boost = 10;
@@ -64,23 +69,24 @@ public class PlayerShipMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Collect player position
         Vector3 pos = transform.position;
+
+        //Find screen weidge and height data
         Vector3 squareinscreen = Camera.main.WorldToScreenPoint(pos);
 
         //Keep speed at a moderate rate
-        if (Speed < 0.015f)
+        if (Speed < 0.07f)
         {
             Speed += 0.01f;
         }
 
 
         //Turn ship towards mouse
-       
         Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mouse - transform.position;
         transform.up = direction;
 
-        Vector3 BoostDynamic = mouse - pos;
 
 
         //Establish boundaries so player cant fly off the screen
@@ -142,7 +148,7 @@ public class PlayerShipMovement : MonoBehaviour
 
 
         //Check if boost button -left shift- is used
-
+        //Start boost-coroutine if leftshift is pressed 
         if (Input.GetKey(KeyCode.LeftShift))
         {
             print("Phase 1 of 3 is good");
@@ -155,14 +161,34 @@ public class PlayerShipMovement : MonoBehaviour
            
         }
 
+        //Recharge boost overtime if its amount is less than 15, and also when the player isnt
+        //already boosting
         if (B < 15 && Boost < 15 && BoosterIsBoosting == null)
         {
             B += Time.deltaTime*3;
             Boost += Time.deltaTime * 3;
-            //print(B);
             RefillBoost.Invoke(1);
         }
 
+
+        //FireBullets with leftclick
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            //interval controls the rate of fire for bullets. After a bullet is fire, this interval
+            //resets back to 0
+            if (interval > 0.1f)
+            {
+                Instantiate(bullets, transform.position, Quaternion.identity);
+                interval = 0;
+            }
+
+            //recharge interval over time
+            interval += Time.deltaTime;
+
+            //slow down ship as it fires
+            Speed = 0.01f;
+
+        }
 
         //Move ship position
         transform.position = pos;

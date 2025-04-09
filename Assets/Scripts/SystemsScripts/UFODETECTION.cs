@@ -13,6 +13,8 @@ public class UFODETECTION : MonoBehaviour
     public PlayerShipMovement r;
     public float h;
 
+    public bool foundplayer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,6 @@ public class UFODETECTION : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //h = r.GetComponent<PlayerShipMovement>().pos;
         sr = Seeker.GetComponent<SpriteRenderer>();
 
         bool playerinsight = sr.bounds.Contains(playerlocation.transform.position);
@@ -33,7 +34,7 @@ public class UFODETECTION : MonoBehaviour
         {
             print("found em!!");
             //Seeker.invoke(1);
-
+            foundplayer = false;
         }
         else
         {
