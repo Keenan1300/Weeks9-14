@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 610473139365708637}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -1, w: 0.00000058114523}
-  m_LocalPosition: {x: 0.0261, y: 2.6319, z: -0.05196466}
-  m_LocalScale: {x: 0.3769374, y: 4.638635, z: 1.23416}
+  m_LocalPosition: {x: 0.03, y: 3.96, z: -0.05196466}
+  m_LocalScale: {x: 0.42405456, y: 6.710782, z: 1.23416}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6970884690972628244}
@@ -99,6 +99,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Seeker: {fileID: 610473139365708637}
   playerlocation: {fileID: 0}
+  Fire:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8265259383010360413}
+        m_TargetAssemblyTypeName: EnemyScript, Assembly-CSharp
+        m_MethodName: FireGun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1088840593895822050
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9195ddf472cd9bc4ebb99fdb05079122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bullets: {fileID: 7882419671861516102, guid: 09e00570084376849bdb5f57636aef3f, type: 3}
   SeekPlayer:
     m_PersistentCalls:
       m_Calls:
@@ -292,7 +308,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  detect: {fileID: 6740004605570378968}
+  player: {fileID: 0}
   HP: 0
   GunCoolDown: 0
   found: 0
@@ -398,4 +414,18 @@ MonoBehaviour:
   playerlocation: {fileID: 0}
   r: {fileID: 0}
   h: 0
-  foundplayer: 0
+  playerfound:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8265259383010360413}
+        m_TargetAssemblyTypeName: EnemyScript, Assembly-CSharp
+        m_MethodName: isfound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class EnemyScript : MonoBehaviour
 {
-
+    //Stores bullet object
     public GameObject bullets;
 
     //initialize unity events to seek the player
@@ -81,18 +81,37 @@ public class EnemyScript : MonoBehaviour
     {
         //interval controls the rate of fire for bullets. After a bullet is fire, this interval
         //resets back to 0
-        if (interval > 1.5f)
+        if (interval > 0.5f)
         {
+            Vector3 Playerpos = player.transform.position;
+            Vector3 direction = Playerpos - transform.position;
+
             //create a bullet instance, and give it the knowledge of the player position
             GameObject bullet = Instantiate(bullets, transform.position, Quaternion.identity);
-            bullet.GetComponent<EnemyScript>().player = player;
+            
             interval = 0;
+
+            bullet.transform.up = direction;
+            bullet.GetComponent<EnemyBullets>().player = player.transform;
+  
+            EnemyBullets Script = bullet.GetComponent<EnemyBullets>();
+
+            Destroy(bullet,0.5f);
         }
 
         //recharge interval over time
         interval += Time.deltaTime;
     }
 
+    public void bulletFiring()
+    {
+        Vector3 Playerpos = player.transform.position;
+        Vector3 pos = transform.position;
+
+        Vector3 direction = pos - Playerpos;
+
+        transform.position += (direction * Time.deltaTime * 20);
+    }
     public void death()
     {
         //Remove All listeners

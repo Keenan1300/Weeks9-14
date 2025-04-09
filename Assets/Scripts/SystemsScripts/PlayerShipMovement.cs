@@ -176,7 +176,7 @@ public class PlayerShipMovement : MonoBehaviour
         {
             //interval controls the rate of fire for bullets. After a bullet is fire, this interval
             //resets back to 0
-            if (interval > 0.1f)
+            if (interval > 0.2f)
             {
                 Instantiate(bullets, transform.position, Quaternion.identity);
                 interval = 0;

@@ -1,37 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.ReorderableList;
 using UnityEditor.Experimental.RestService;
 using UnityEngine;
 
 public class EnemyBullets : MonoBehaviour
 {
+    //Sprite renderer will be used for sprite bounds
+    public SpriteRenderer Bullet;
 
-    //Read player position
+    //collect player location data
     public Transform player;
-    EnemyScript EnemyScript;
-    float PlayerData;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        player.GetComponent<EnemyScript>().player = player;
-        EnemyScript = new EnemyScript();
-
-        Vector3 Playerpos = player.transform.position;
-        Vector2 direction = Playerpos - transform.position;
-        transform.up = direction;
+      
     }
 
     // Update is called once per frame
     void Update()
     {
-        player.GetComponent<EnemyScript>().player = player;
-        Vector3 Playerpos = player.transform.position;
+        //Read where the player is
+        Vector3 ppos = player.transform.position;
+
+        //use current location
         Vector3 pos = transform.position;
 
-        Vector3 direction = pos - Playerpos;
+        //find the middle vector between these 2 location
+        Vector3 bulletrack = pos - ppos;
 
-        transform.position += (direction * Time.deltaTime * 20);
-        Destroy(gameObject, 0.2f);
+        Vector3 move = transform.position;
+
+        //Subtract current postion by the distance between itself and the playership
+        move -= bulletrack * Time.deltaTime * 80;       
+
+        transform.position = move;
+
+
+
+        //check if this bullet is colliding with player
+        bool playerhit = Bullet.bounds.Contains(player.transform.position);
+
+        if (playerhit)
+        {
+
+
+        }
+
     }
 }
