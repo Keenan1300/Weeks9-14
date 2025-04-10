@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class BulletAction : MonoBehaviour
 {
-    //Randomly dictates the life span of bullets shot by the player
-    float BulletDecay;
 
     //Audio elements for the bullet
     public AudioSource laser;
@@ -29,9 +27,8 @@ public class BulletAction : MonoBehaviour
     {
         Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 pos = transform.position;
-        BulletDecay = Random.Range(0.05f, 0.1f);
         Vector3 bulletrad = pos - mouse;
         transform.position -= (bulletrad * Time.deltaTime * 30);
-        Destroy(gameObject, BulletDecay);
+        Destroy(gameObject, 0.1f);
     }
 }

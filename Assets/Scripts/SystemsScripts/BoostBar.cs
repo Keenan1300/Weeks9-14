@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class BoostBar : MonoBehaviour
 {
     public GameObject PlayerShip;
-    public UnityEvent<int> OnTheHour;
     public Slider barlength;
     float Boostdata;
 

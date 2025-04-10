@@ -37,8 +37,11 @@ public class Spawner : MonoBehaviour
     //T will decided the randomness of spawning at one of these locations
     int T;
 
+    //basic timer
+    float Timer;
+
     //S will dictate the delay between spawns 
-    float S;
+    float S = 0;
 
     //initialize 4 waves the player must survive
     public bool wave1;
@@ -54,7 +57,7 @@ public class Spawner : MonoBehaviour
 
         //listen to when the button is clicked. If it is, spawn UFOs 
         Startwavebutton = buttonobject.GetComponent<Button>();
-        Startwavebutton.onClick.AddListener(Startwave1);
+        Startwavebutton.onClick.AddListener(spawnUFOs);
 
         //Define the beginning and end of waves
         wave1 = false;
@@ -66,31 +69,6 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        S += Time.deltaTime;
-
-        if (wave1 == true)
-        {
-            if (S == 1)
-            {
-                spawnUFOs();
-            }
-
-            if (S == 2) 
-            {
-                spawnUFOs();
-            }
-
-            if (S == 3)
-            {
-                spawnUFOs();
-            }
-
-            if (S == 4)
-            {
-                spawnUFOs();
-            }
-        }
-
     }
 
     public void spawnUFOs()
@@ -131,7 +109,7 @@ public class Spawner : MonoBehaviour
 
     public void Startwave1()
     {
-
+        S = 0;
         wave1 = true;
     }
 }

@@ -1321,9 +1321,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerShip: {fileID: 506796156}
-  OnTheHour:
-    m_PersistentCalls:
-      m_Calls: []
   barlength: {fileID: 876205747}
 --- !u!1 &942264599
 GameObject:
@@ -1524,6 +1521,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1035827473}
   - component: {fileID: 1035827474}
+  - component: {fileID: 1035827475}
   m_Layer: 5
   m_Name: AmmoBar
   m_TagString: Untagged
@@ -1602,6 +1600,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1035827475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035827472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 908ae71abc68b824daff749cb5d9dbcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerShip: {fileID: 506796156}
+  barlength: {fileID: 1035827474}
 --- !u!1 &1093884925
 GameObject:
   m_ObjectHideFlags: 0
@@ -3100,7 +3112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8417095565716176839, guid: ed67267093cebe443baa42eabc9b2028, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8417095565716176839, guid: ed67267093cebe443baa42eabc9b2028, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -3113,7 +3125,7 @@ PrefabInstance:
     - target: {fileID: 8417095565716176839, guid: ed67267093cebe443baa42eabc9b2028, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 967063031}
+      objectReference: {fileID: 967063028}
     - target: {fileID: 8417095565716176839, guid: ed67267093cebe443baa42eabc9b2028, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -3128,11 +3140,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8417095565716176839, guid: ed67267093cebe443baa42eabc9b2028, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Spawner, Assembly-CSharp
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8417095565716176839, guid: ed67267093cebe443baa42eabc9b2028, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

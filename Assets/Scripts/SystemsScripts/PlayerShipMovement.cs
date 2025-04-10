@@ -59,7 +59,7 @@ public class PlayerShipMovement : MonoBehaviour
     float rotspeed = 0.05f;
 
 
-    //Initialize coroutine for 
+    //Initialize coroutine for boosting, will rapidly process player movement 
     Coroutine BoosterIsBoosting;
     IEnumerator Boosted;
 
@@ -69,7 +69,7 @@ public class PlayerShipMovement : MonoBehaviour
     {
         interval = 0;
         HP = 100;
-        Ammo = 12;
+        Ammo = 15;
         Boost = 10;
         B = 10;
         BoosterIsBoosting = null;
@@ -92,6 +92,13 @@ public class PlayerShipMovement : MonoBehaviour
         if (Speed < 0.03f)
         {
             Speed += 0.01f;
+        }
+
+        //check ammo amount so player can slowly recharge bullets
+        if (Ammo < 14)
+        {
+            Ammo += (Time.deltaTime * 5);
+
         }
 
 
@@ -191,7 +198,7 @@ public class PlayerShipMovement : MonoBehaviour
             //resets back to 0
             if (Ammo > 1)
             {
-                if (interval > 0.2f)
+                if (interval > 0.1f)
                 {
                     //When left click is activated create an instance of a bullet, give it access 
                     //to UFO data, along with 
@@ -205,7 +212,6 @@ public class PlayerShipMovement : MonoBehaviour
             }
             //recharge interval over time
             interval += Time.deltaTime;
-            Ammo += Time.deltaTime;
 
             //slow down ship as it fires
             Speed = 0.01f;
@@ -221,8 +227,7 @@ public class PlayerShipMovement : MonoBehaviour
     // moves the ship towards the mouse rapidly to make it a appear like its boosting
     IEnumerator SpeedShip()
     {
-
-            print("Phase 2 of 3 is good");
+        //Setup speed variable so it doesnt interfere with boost functions.
             Boosted = Accelerate();
             Speed = 0;
             yield return StartCoroutine(Boosted);
@@ -239,23 +244,25 @@ public class PlayerShipMovement : MonoBehaviour
             boost.Play();
         }
         
-
-        print("Phase 3 of 3 is good!!");
+        //Collect positional data so the ship knows where its boosting
         Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouse.z = 0;
         Vector3 pos = transform.position;
         Vector3 shift = pos - mouse;
 
-
+        //Establish while loop that reduces total boost amount with each use, but also abides by interval of boost use
+        //makes it so player consumes turbo, but not all at once.
         while (B > 1 && Boost > 1)
         {
-            print("Phase 4 of 3 is good!!");
             B -= 1;
             Boost -= 1;
             ConsumeBoost.Invoke(1);
+
+            //Move player along the vector between the mouse and its own position
             transform.position -= (shift * Time.deltaTime* (Boost*10));
 
 
+            //Check to make sure player is never too far out of bounds from boost. If they somehow are, return them to the center of the game screen.
             if (pos.x < -13 || pos.x > 13 || pos.y < -6 || pos.y > 6)
             {
                 pos = new Vector3(0, 0, 0);
