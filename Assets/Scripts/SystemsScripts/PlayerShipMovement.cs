@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -58,6 +59,9 @@ public class PlayerShipMovement : MonoBehaviour
     float Speed = 0.015f;
     float rotspeed = 0.05f;
 
+
+    //Let ammo decide whether or not shots can be made
+    public bool Cannotfire = false;
 
     //Initialize coroutine for boosting, will rapidly process player movement 
     Coroutine BoosterIsBoosting;
@@ -198,6 +202,8 @@ public class PlayerShipMovement : MonoBehaviour
             //resets back to 0
             if (Ammo > 1)
             {
+                Cannotfire = false;
+
                 if (interval > 0.1f)
                 {
                     //When left click is activated create an instance of a bullet, give it access 
@@ -209,6 +215,10 @@ public class PlayerShipMovement : MonoBehaviour
 
                     interval = 0;
                 }
+            }
+            else
+            {
+                Cannotfire = true;
             }
             //recharge interval over time
             interval += Time.deltaTime;

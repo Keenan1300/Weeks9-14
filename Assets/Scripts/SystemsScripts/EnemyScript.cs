@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
@@ -15,9 +14,13 @@ public class EnemyScript : MonoBehaviour
     //Stores enemy bullet object
     public GameObject bullets;
 
-    //Get player data like ammo count
-    public PlayerShipMovement playerdata;
-    public float ammo;
+    //Store pickup item that potentially drops with UFO death
+    public GameObject pickup1;
+    public GameObject pickup2;
+    public GameObject pickup3;
+
+    //randomdice roll for pickups
+    float PickupRoll;
 
     //initialize unity events to seek the player
     public UnityEvent SeekPlayer;
@@ -25,14 +28,10 @@ public class EnemyScript : MonoBehaviour
 
     //Read player positions
     public Transform player;
+    public float Playerammo;
 
     //intialize enemy firerate
     float interval;
-
-
-    //UFO stats
-    public float HP;
-    public float GunCoolDown;
     
     //Booleans for player detection
     public bool found;
@@ -41,22 +40,18 @@ public class EnemyScript : MonoBehaviour
     void Start()
     {
         interval = 0;
-        ammo = playerdata.GetComponent<PlayerShipMovement>().Ammo;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-      //Update Sprite Boundaries of UFO so that player can access where UFO Sprite is
-       SpriteRenderer UFOBOUNDS = UFOSPRITE.GetComponent<SpriteRenderer>();
+        //Update Sprite Boundaries of UFO so that player can access where UFO Sprite is
+        SpriteRenderer UFOBOUNDS = UFOSPRITE.GetComponent<SpriteRenderer>();
        
        //Know where player mouse is at all times
        Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (HP < 1) 
-        {
-         
-        }
 
         if (found == false)
         {
@@ -80,13 +75,11 @@ public class EnemyScript : MonoBehaviour
 
         if (UFOhinrange)
         {
-            if (ammo > 1)
-            {
                 if (Input.GetKey(KeyCode.Mouse0))
                 {
-                    Destroy(gameObject, 0.7f);
+                    death();
                 }
-            }
+            
 
         }
     }
@@ -141,7 +134,29 @@ public class EnemyScript : MonoBehaviour
     }
     public void death()
     {
-        //Remove All listeners
+        PickupRoll = Random.Range(1, 10);
+
+
+        if (PickupRoll == 1)
+        {
+            GameObject pickupchance = Instantiate(pickup1, transform.position, Quaternion.identity);
+            Destroy(gameObject, 0.7f);
+        }
+        if (PickupRoll == 2)
+        {
+            GameObject pickupchance = Instantiate(pickup2, transform.position, Quaternion.identity);
+            Destroy(gameObject, 0.7f);
+        }
+        if (PickupRoll == 3)
+        {
+            GameObject pickupchance = Instantiate(pickup3, transform.position, Quaternion.identity);
+            Destroy(gameObject, 0.7f);
+        }
+        if (PickupRoll >= 4)
+        {
+            Destroy(gameObject, 0.7f);
+        }
+
 
     }
-}
+    }

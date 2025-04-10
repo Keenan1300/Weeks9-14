@@ -16,6 +16,10 @@ public class Spawner : MonoBehaviour
     public Button Startwavebutton;
 
 
+    //Collect player script
+    public PlayerShipMovement PlayerShipMovement;
+
+
     //Necessary GameObject information for instantiation chains
     //This will act as the UFOs the player will shoot at
     public GameObject UFO;
@@ -39,6 +43,12 @@ public class Spawner : MonoBehaviour
 
     //basic timer
     float Timer;
+
+    //store player ammo
+    public float Ammo;
+
+    //store when player can and cannot fire
+    public bool Cannotfire;
 
     //S will dictate the delay between spawns 
     float S = 0;
@@ -69,8 +79,10 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //S will be the spawn rate of UFOs, and will vary from wave to wave.
-        
+        float Ammo = PlayerShipMovement.GetComponent<PlayerShipMovement>().Ammo;
+        bool Cannotfire = PlayerShipMovement.GetComponent<PlayerShipMovement>().Cannotfire;
+        //'S' will be the spawn rate of UFOs, and will vary from wave to wave.
+
         Debug.Log(S);
 
         if (wave1 == true)

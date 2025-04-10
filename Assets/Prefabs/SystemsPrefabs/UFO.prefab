@@ -296,6 +296,8 @@ MonoBehaviour:
   UFOBOUNDS: {fileID: 705596976764158283}
   UFOSPRITE: {fileID: 1157198001151102739}
   bullets: {fileID: 7882419671861516102, guid: 09e00570084376849bdb5f57636aef3f, type: 3}
+  Spawner: {fileID: 0}
+  Cannotfire: 0
   SeekPlayer:
     m_PersistentCalls:
       m_Calls:
@@ -312,6 +314,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   player: {fileID: 6970884690972628244}
+  Playerammo: 0
   HP: 0
   GunCoolDown: 0
   found: 0
