@@ -102,7 +102,7 @@ public class Spawner : MonoBehaviour
     public void spawnUFOs()
     {
       
-        T = Random.Range(1, 4);
+        T = Random.Range(1, 5);
 
         //Random Roll for where UFO will spawn. Decided by T
         if (T == 1)
@@ -126,7 +126,7 @@ public class Spawner : MonoBehaviour
             newUFO.GetComponent<EnemyScript>().player = player.transform;
             newUFO.GetComponent<EnemyScript>().bullets = bullets;
         }
-        if (T == 4)
+        if (T >= 4)
         {
             Vector3 Spawnlocation = Spawnlocation4.transform.position;
             GameObject newUFO = Instantiate(UFO, Spawnlocation, Quaternion.identity);
