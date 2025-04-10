@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
+using UnityEditor.Experimental.RestService;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,6 +14,10 @@ public class EnemyScript : MonoBehaviour
 
     //Stores enemy bullet object
     public GameObject bullets;
+
+    //Get player data like ammo count
+    public PlayerShipMovement playerdata;
+    public float ammo;
 
     //initialize unity events to seek the player
     public UnityEvent SeekPlayer;
@@ -36,7 +41,7 @@ public class EnemyScript : MonoBehaviour
     void Start()
     {
         interval = 0;
-        
+        ammo = playerdata.GetComponent<PlayerShipMovement>().Ammo;
     }
 
     // Update is called once per frame
@@ -75,9 +80,12 @@ public class EnemyScript : MonoBehaviour
 
         if (UFOhinrange)
         {
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (ammo > 1)
             {
-                Destroy(gameObject,0.7f);
+                if (Input.GetKey(KeyCode.Mouse0))
+                {
+                    Destroy(gameObject, 0.7f);
+                }
             }
 
         }

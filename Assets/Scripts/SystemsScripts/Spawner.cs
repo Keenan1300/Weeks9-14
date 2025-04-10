@@ -57,7 +57,7 @@ public class Spawner : MonoBehaviour
 
         //listen to when the button is clicked. If it is, spawn UFOs 
         Startwavebutton = buttonobject.GetComponent<Button>();
-        Startwavebutton.onClick.AddListener(spawnUFOs);
+        Startwavebutton.onClick.AddListener(Startwave1);
 
         //Define the beginning and end of waves
         wave1 = false;
@@ -69,6 +69,22 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //S will be the spawn rate of UFOs, and will vary from wave to wave.
+        
+        Debug.Log(S);
+
+        if (wave1 == true)
+        {
+            S += Time.deltaTime*5;
+
+            if (S > 10)
+            {
+                spawnUFOs();
+                S = 0;
+            }
+
+        }
+
     }
 
     public void spawnUFOs()
@@ -105,6 +121,7 @@ public class Spawner : MonoBehaviour
             newUFO.GetComponent<EnemyScript>().player = player.transform;
             newUFO.GetComponent<EnemyScript>().bullets = bullets;
         }
+        
     }
 
     public void Startwave1()
