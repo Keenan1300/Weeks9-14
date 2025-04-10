@@ -1501,6 +1501,7 @@ MonoBehaviour:
   Startwavebutton: {fileID: 1305755201043760346}
   UFO: {fileID: 1297583389842772735, guid: 094e6837b31bdea41ba8fb50de300e3b, type: 3}
   bullets: {fileID: 7882419671861516102, guid: 09e00570084376849bdb5f57636aef3f, type: 3}
+  bulletsprite: {fileID: 0}
   player: {fileID: 506796157}
   Spawnlocation1: {fileID: 2118457685}
   Spawnlocation2: {fileID: 1985576347}
@@ -2097,6 +2098,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1444477629}
   - component: {fileID: 1444477630}
+  - component: {fileID: 1444477631}
   m_Layer: 0
   m_Name: TutorialUI
   m_TagString: Untagged
@@ -2174,6 +2176,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1444477631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444477628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4edf85dc704e4ba4aad55c158c33560a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Startwavebutton: {fileID: 1305755201043760346}
 --- !u!1 &1483421000
 GameObject:
   m_ObjectHideFlags: 0
@@ -2950,6 +2965,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2395394360335151357, guid: 0d3c1f9b5999ce8418d39e892d21eb8e, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 506796157}
+    - target: {fileID: 2395394360335151357, guid: 0d3c1f9b5999ce8418d39e892d21eb8e, type: 3}
+      propertyPath: GetUFOData
+      value: 
+      objectReference: {fileID: 967063031}
     - target: {fileID: 2395394360335151357, guid: 0d3c1f9b5999ce8418d39e892d21eb8e, type: 3}
       propertyPath: ConsumeBoost.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

@@ -28,7 +28,7 @@ public class UFODETECTION : MonoBehaviour
     void Update()
     {
         //get player location data from main UFO script
-        player = enemyScript.GetComponent<EnemyScript>().player;
+        Transform player = enemyScript.GetComponent<EnemyScript>().player;
 
         //Get the sprite data from the field of view sprite (invisible sprite)
         sr = Seeker.GetComponent<SpriteRenderer>();

@@ -7,17 +7,19 @@ using UnityEngine.Events;
 
 public class EnemyScript : MonoBehaviour
 {
+    //Store Bounds of UFO
+    public SpriteRenderer UFOBOUNDS;
+    public GameObject UFOSPRITE;
 
-    //Stores bullet object
+    //Stores enemy bullet object
     public GameObject bullets;
 
     //initialize unity events to seek the player
     public UnityEvent SeekPlayer;
 
 
-    //Read player position
+    //Read player positions
     public Transform player;
-
 
     //intialize enemy firerate
     float interval;
@@ -40,6 +42,8 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      //Update Sprite Boundaries of UFO so that player can access where UFO Sprite is
+       SpriteRenderer UFOBOUNDS = UFOSPRITE.GetComponent<SpriteRenderer>();
 
 
         if (HP < 1) 
@@ -63,6 +67,15 @@ public class EnemyScript : MonoBehaviour
             transform.position += (direction * Time.deltaTime);
         }
 
+
+        //check if this bullet is colliding with player
+        bool UFOhit = UFOBOUNDS.bounds.Contains(bullets.transform.position);
+
+        if (UFOhit)
+        {
+            Destroy(gameObject);
+
+        }
     }
 
     public void isfound() 

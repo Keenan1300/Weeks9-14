@@ -14,8 +14,10 @@ public class Spawner : MonoBehaviour
     //This will act as the UFOs the player will shoot at
     public GameObject UFO;
 
+
     //Stores bullet object
     public GameObject bullets;
+    public SpriteRenderer bulletsprite;
 
     //Trackplayerposition at all times
     public Transform player;
@@ -39,9 +41,13 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SpriteRenderer bulletsprite = bullets.GetComponent<SpriteRenderer>();
+
+        //listen to when the button is clicked. If it is, spawn UFOs 
         Startwavebutton = buttonobject.GetComponent<Button>();
         Startwavebutton.onClick.AddListener(spawnUFOs);
 
+        //Define the beginning and end of waves
         wave1 = false;
         wave2 = false;
         wave3 = false;

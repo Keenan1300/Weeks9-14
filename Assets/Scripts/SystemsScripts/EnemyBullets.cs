@@ -12,7 +12,6 @@ public class EnemyBullets : MonoBehaviour
     //collect player location data
     public Transform player;
 
-    EnemyScript EScriptdata;
 
 
 
@@ -25,6 +24,7 @@ public class EnemyBullets : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SpriteRenderer Bullet = GetComponent<SpriteRenderer>();
 
         //Read where the player is
         Vector3 ppos = player.transform.position;
@@ -38,7 +38,7 @@ public class EnemyBullets : MonoBehaviour
         Vector3 move = transform.position;
 
         //Subtract current postion by the distance between itself and the playership
-        move -= bulletrack * Time.deltaTime * 80;       
+        move -= bulletrack * Time.deltaTime * 20;       
 
         transform.position = move;
 

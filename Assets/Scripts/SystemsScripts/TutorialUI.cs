@@ -8,14 +8,12 @@ public class TutorialUI : MonoBehaviour
 
 
     //Keep track of buttons for introduction
-    public GameObject buttonobject;
     public Button Startwavebutton;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        Startwavebutton = buttonobject.GetComponent<Button>();
         Startwavebutton.onClick.AddListener(Disapear);
     }
 

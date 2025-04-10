@@ -8,12 +8,21 @@ using static UnityEditor.PlayerSettings;
 
 public class PlayerShipMovement : MonoBehaviour
 {
+    //Store Enemy locations from spawner
+    public Spawner GetUFOData;
+    public GameObject UFO;
+    public SpriteRenderer UFOBOUNDS;
+
+
     //store bullets
     public GameObject bullets;
 
     //Store player starship booster sounds
     public AudioSource boost;
     public AudioClip playboost;
+
+    //Store player data
+    public Transform player;
 
 
     //Add unity events for each stat the player has. These will increase or decrease the 
@@ -69,6 +78,10 @@ public class PlayerShipMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Update UFO locations and bounds data
+        GameObject UFO = GetUFOData.GetComponent<Spawner>().UFO;
+        SpriteRenderer UFOBOUNDS = UFO.GetComponent<SpriteRenderer>();
+
         //Collect player position
         Vector3 pos = transform.position;
 
@@ -176,9 +189,14 @@ public class PlayerShipMovement : MonoBehaviour
         {
             //interval controls the rate of fire for bullets. After a bullet is fire, this interval
             //resets back to 0
-            if (interval > 0.2f)
+            if (interval > 0.4f)
             {
+                //When left click is activated create an instance of a bullet, give it access 
+                //to UFO data, along with 
                 Instantiate(bullets, transform.position, Quaternion.identity);
+       
+      
+
                 interval = 0;
             }
 
