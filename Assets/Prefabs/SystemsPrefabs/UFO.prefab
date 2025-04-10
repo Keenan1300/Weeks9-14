@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Seeker: {fileID: 610473139365708637}
   enemyScript: {fileID: 8265259383010360413}
-  playerlocation: {fileID: 0}
+  playerlocation: {fileID: 6970884690972628244}
   Fire:
     m_PersistentCalls:
       m_Calls:
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9195ddf472cd9bc4ebb99fdb05079122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UFOBOUNDS: {fileID: 0}
+  UFOBOUNDS: {fileID: 705596976764158283}
   UFOSPRITE: {fileID: 1157198001151102739}
   bullets: {fileID: 7882419671861516102, guid: 09e00570084376849bdb5f57636aef3f, type: 3}
   SeekPlayer:
@@ -311,7 +311,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  player: {fileID: 0}
+  player: {fileID: 6970884690972628244}
   HP: 0
   GunCoolDown: 0
   found: 0

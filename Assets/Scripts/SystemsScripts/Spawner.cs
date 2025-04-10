@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour
 {
+    //StoreAllpickupPrefabs
+    public GameObject ShieldPickup;
+    public GameObject AmmoPickup;
+    public GameObject HPPickup;
+
+
     //Keep track of buttons for introduction
     public GameObject buttonobject;
     public Button Startwavebutton;

@@ -189,7 +189,7 @@ public class PlayerShipMovement : MonoBehaviour
         {
             //interval controls the rate of fire for bullets. After a bullet is fire, this interval
             //resets back to 0
-            if (interval > 0.4f)
+            if (interval > 0.2f)
             {
                 //When left click is activated create an instance of a bullet, give it access 
                 //to UFO data, along with 

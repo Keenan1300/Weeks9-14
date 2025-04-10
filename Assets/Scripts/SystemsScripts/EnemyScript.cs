@@ -46,11 +46,11 @@ public class EnemyScript : MonoBehaviour
        SpriteRenderer UFOBOUNDS = UFOSPRITE.GetComponent<SpriteRenderer>();
        
        //Know where player mouse is at all times
-       Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+       Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (HP < 1) 
         {
-        
+         
         }
 
         if (found == false)
@@ -77,7 +77,7 @@ public class EnemyScript : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Mouse0))
             {
-                Destroy(gameObject);
+                Destroy(gameObject,0.7f);
             }
 
         }
