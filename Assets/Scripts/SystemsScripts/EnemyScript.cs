@@ -44,7 +44,9 @@ public class EnemyScript : MonoBehaviour
     {
       //Update Sprite Boundaries of UFO so that player can access where UFO Sprite is
        SpriteRenderer UFOBOUNDS = UFOSPRITE.GetComponent<SpriteRenderer>();
-
+       
+       //Know where player mouse is at all times
+       Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (HP < 1) 
         {
@@ -69,11 +71,14 @@ public class EnemyScript : MonoBehaviour
 
 
         //check if this bullet is colliding with player
-        bool UFOhit = UFOBOUNDS.bounds.Contains(bullets.transform.position);
+        bool UFOhinrange = UFOBOUNDS.bounds.Contains(mouse);
 
-        if (UFOhit)
+        if (UFOhinrange)
         {
-            Destroy(gameObject);
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                Destroy(gameObject);
+            }
 
         }
     }
