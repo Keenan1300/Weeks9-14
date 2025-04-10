@@ -189,19 +189,23 @@ public class PlayerShipMovement : MonoBehaviour
         {
             //interval controls the rate of fire for bullets. After a bullet is fire, this interval
             //resets back to 0
-            if (interval > 0.2f)
+            if (Ammo > 1)
             {
-                //When left click is activated create an instance of a bullet, give it access 
-                //to UFO data, along with 
-                Instantiate(bullets, transform.position, Quaternion.identity);
-       
-      
+                if (interval > 0.2f)
+                {
+                    //When left click is activated create an instance of a bullet, give it access 
+                    //to UFO data, along with 
+                    Instantiate(bullets, transform.position, Quaternion.identity);
+                    Ammo -= 2;
 
-                interval = 0;
+
+
+                    interval = 0;
+                }
             }
-
             //recharge interval over time
             interval += Time.deltaTime;
+            Ammo += Time.deltaTime;
 
             //slow down ship as it fires
             Speed = 0.01f;
