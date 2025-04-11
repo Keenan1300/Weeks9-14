@@ -20,6 +20,10 @@ public class PlayerShipMovement : MonoBehaviour
 
     //recognize shield game object
     public GameObject Shield;
+    //checks if shield is gained
+    public bool ShieldGained;
+    //measures duration of shield pickup
+    public float Stime;
 
     //Store player starship booster sounds
     public AudioSource boost;
@@ -89,6 +93,27 @@ public class PlayerShipMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+        //recognize shield booster. Give it a time for how long it provides invulnerability.
+        if (ShieldGained == true)
+        {
+            Stime = Time.deltaTime;
+
+            if (Stime < 10)
+            {
+                Shield.SetActive(true);
+                HP = 15;
+            }
+            else
+            {
+                Shield.SetActive(false);
+                ShieldGained = false;
+            }
+        }
+
+
+
         //Update UFO locations and bounds data
         GameObject UFO = GetUFOData.GetComponent<Spawner>().UFO;
         SpriteRenderer UFOBOUNDS = UFO.GetComponent<SpriteRenderer>();
@@ -291,24 +316,28 @@ public class PlayerShipMovement : MonoBehaviour
         
 
     }
+    //function for when player is hit by a bullet
     public void Hit()
     {
         HP--;
     }
 
-    void FireGun()
-    {
-        Ammo--;
-    }
-
-    void restorehealth() 
+    //function for Health restore pickup item
+    public void restorehealth() 
     {
         HP = 15;
     }
 
-    void ammorefill()
+    //function for Ammo restore pickup item
+    public void ammorefill()
     {
         Ammo = 15;
+    }
+
+    //function for shield boost pickup item
+    public void gainshield() 
+    {
+        ShieldGained = true;
     }
 
 }

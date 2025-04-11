@@ -220,6 +220,7 @@ MonoBehaviour:
   UFO: {fileID: 0}
   UFOBOUNDS: {fileID: 0}
   bullets: {fileID: 3194851849303943171, guid: cdfab381da82af9438da861909ab5227, type: 3}
+  Shield: {fileID: 2295378127489140379}
   boost: {fileID: 72365892581376229}
   playboost: {fileID: 8300000, guid: 6d55578e8c0665f47aaa22d15e1f0f49, type: 3}
   player: {fileID: 758434080066630411}
