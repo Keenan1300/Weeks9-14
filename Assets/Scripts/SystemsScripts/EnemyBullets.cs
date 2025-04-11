@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.ReorderableList;
@@ -11,9 +12,10 @@ public class EnemyBullets : MonoBehaviour
 
     //collect player location data
     public Transform player;
+    public PlayerShipMovement playership;
 
-
-
+    //track player HP so that this bullet can potentially lower it
+    public float HP;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,7 @@ public class EnemyBullets : MonoBehaviour
     void Update()
     {
         SpriteRenderer Bullet = GetComponent<SpriteRenderer>();
+        HP = playership.GetComponent<PlayerShipMovement>().HP;
 
         //Read where the player is
         Vector3 ppos = player.transform.position;
@@ -42,16 +45,27 @@ public class EnemyBullets : MonoBehaviour
 
         transform.position = move;
 
-
+        
 
         //check if this bullet is colliding with player
         bool playerhit = Bullet.bounds.Contains(player.transform.position);
 
         if (playerhit)
         {
+            playership.Hit();
             Destroy(gameObject);
 
         }
 
+    }
+
+    public void setPlayer(PlayerShipMovement playerset)
+    {
+        Debug.Log("Setting player to bullet");
+        playership = playerset;
+        if(playership == null)
+        {
+            print("Hello!");
+        }
     }
 }

@@ -26,8 +26,9 @@ public class EnemyScript : MonoBehaviour
     public UnityEvent SeekPlayer;
 
 
-    //Read player positions
+    //Read player positions and object data
     public Transform player;
+    public PlayerShipMovement playership;
     public float Playerammo;
 
     //intialize enemy firerate
@@ -140,9 +141,10 @@ public class EnemyScript : MonoBehaviour
             GameObject bullet = Instantiate(bullets, transform.position, Quaternion.identity);
 
             interval = 0;
-
+            bullet.GetComponent<EnemyBullets>().setPlayer(playership);
             bullet.transform.up = direction;
             bullet.GetComponent<EnemyBullets>().player = player.transform;
+            bullet.GetComponent<EnemyBullets>().playership = playership;
 
             EnemyBullets Script = bullet.GetComponent<EnemyBullets>();
 
@@ -161,5 +163,10 @@ public class EnemyScript : MonoBehaviour
         Vector3 direction = pos - Playerpos;
 
         transform.position += (direction * Time.deltaTime * 20);
+    }
+
+    public void setPlayer(PlayerShipMovement playerset )
+    {
+        playership = playerset;
     }
 }

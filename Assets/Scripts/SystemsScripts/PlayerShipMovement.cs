@@ -18,6 +18,9 @@ public class PlayerShipMovement : MonoBehaviour
     //store bullets
     public GameObject bullets;
 
+    //recognize shield game object
+    public GameObject Shield;
+
     //Store player starship booster sounds
     public AudioSource boost;
     public AudioClip playboost;
@@ -71,8 +74,12 @@ public class PlayerShipMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        Shield.SetActive(false);
+
+        //set stat values for player ship
         interval = 0;
-        HP = 100;
+        HP = 15;
         Ammo = 15;
         Boost = 10;
         B = 10;
@@ -284,7 +291,7 @@ public class PlayerShipMovement : MonoBehaviour
         
 
     }
-    void Hit()
+    public void Hit()
     {
         HP--;
     }
@@ -292,6 +299,16 @@ public class PlayerShipMovement : MonoBehaviour
     void FireGun()
     {
         Ammo--;
+    }
+
+    void restorehealth() 
+    {
+        HP = 15;
+    }
+
+    void ammorefill()
+    {
+        Ammo = 15;
     }
 
 }

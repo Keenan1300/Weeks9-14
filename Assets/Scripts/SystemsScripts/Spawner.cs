@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour
 {
+
     //StoreAllpickupPrefabs
     public GameObject ShieldPickup;
     public GameObject AmmoPickup;
@@ -117,6 +119,7 @@ public class Spawner : MonoBehaviour
             Vector3 Spawnlocation = Spawnlocation2.transform.position;
             GameObject newUFO = Instantiate(UFO, Spawnlocation, Quaternion.identity);
             newUFO.GetComponent<EnemyScript>().player = player.transform;
+            newUFO.GetComponent<EnemyScript>().playership = PlayerShipMovement;
             newUFO.GetComponent<EnemyScript>().bullets = bullets;
         }
         if (T == 3)
@@ -124,6 +127,7 @@ public class Spawner : MonoBehaviour
             Vector3 Spawnlocation = Spawnlocation3.transform.position;
             GameObject newUFO = Instantiate(UFO, Spawnlocation, Quaternion.identity);
             newUFO.GetComponent<EnemyScript>().player = player.transform;
+            newUFO.GetComponent<EnemyScript>().playership = PlayerShipMovement;
             newUFO.GetComponent<EnemyScript>().bullets = bullets;
         }
         if (T >= 4)
@@ -131,6 +135,7 @@ public class Spawner : MonoBehaviour
             Vector3 Spawnlocation = Spawnlocation4.transform.position;
             GameObject newUFO = Instantiate(UFO, Spawnlocation, Quaternion.identity);
             newUFO.GetComponent<EnemyScript>().player = player.transform;
+            newUFO.GetComponent<EnemyScript>().playership = PlayerShipMovement;
             newUFO.GetComponent<EnemyScript>().bullets = bullets;
         }
         
