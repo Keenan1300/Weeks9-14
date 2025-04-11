@@ -98,9 +98,9 @@ public class PlayerShipMovement : MonoBehaviour
         //recognize shield booster. Give it a time for how long it provides invulnerability.
         if (ShieldGained == true)
         {
-            Stime = Time.deltaTime;
+            Stime += Time.deltaTime;
 
-            if (Stime < 10)
+            if (Stime < 5)
             {
                 Shield.SetActive(true);
                 HP = 15;
@@ -337,6 +337,7 @@ public class PlayerShipMovement : MonoBehaviour
     //function for shield boost pickup item
     public void gainshield() 
     {
+        Stime = 0;
         ShieldGained = true;
     }
 

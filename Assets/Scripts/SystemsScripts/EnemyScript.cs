@@ -95,16 +95,22 @@ public class EnemyScript : MonoBehaviour
             if (PickupRoll == 1)
             {
                 GameObject pickupchance = Instantiate(pickup1, transform.position, Quaternion.identity);
+                pickupchance.GetComponent<AmmoPickup>().player = player;
+                pickupchance.GetComponent<AmmoPickup>().PlayerShipMovement = playership;
                 Destroy(gameObject, 0.7f);
             }
             if (PickupRoll == 2)
             {
                 GameObject pickupchance = Instantiate(pickup2, transform.position, Quaternion.identity);
+                pickupchance.GetComponent<HealthPickup>().player = player;
+                pickupchance.GetComponent<HealthPickup>().PlayerShipMovement = playership;
                 Destroy(gameObject, 0.7f);
             }
             if (PickupRoll == 3)
             {
                 GameObject pickupchance = Instantiate(pickup3, transform.position, Quaternion.identity);
+                pickupchance.GetComponent<ShieldPickup>().player =  player;
+                pickupchance.GetComponent<ShieldPickup>().PlayerShipMovement = playership;
                 Destroy(gameObject, 0.7f);
             }
             if (PickupRoll >= 4)
