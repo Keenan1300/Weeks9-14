@@ -11,6 +11,9 @@ public class EnemyScript : MonoBehaviour
     public SpriteRenderer UFOBOUNDS;
     public GameObject UFOSPRITE;
 
+    //count number of UFOs
+    public Spawner Spawn;
+
     //Stores enemy bullet object
     public GameObject bullets;
 

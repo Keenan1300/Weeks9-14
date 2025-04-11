@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,12 @@ public class Spawner : MonoBehaviour
     public GameObject buttonobject;
     public Button Startwavebutton;
 
+    //GameLostIndicator
+    public GameObject GameOver;
+
+    //Spawn data holder
+    public Spawner Spawn;
+
 
     //Collect player script
     public PlayerShipMovement PlayerShipMovement;
@@ -26,6 +33,8 @@ public class Spawner : MonoBehaviour
     //This will act as the UFOs the player will shoot at
     public GameObject UFO;
 
+    //Count the amount of UFOs to ensure there isnt too many
+    int UFOSpawncount;
 
     //Stores bullet object
     public GameObject bullets;
@@ -57,14 +66,22 @@ public class Spawner : MonoBehaviour
 
     //initialize 4 waves the player must survive
     public bool wave1;
-    public bool wave2;
-    public bool wave3;
-    public bool wave4;
+
+
+    //establish game loss condition
+    float losscondition;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
+        UFOSpawncount = 0;
+        //Make sure the game isnt over before it has started.
+        //disable gameover screen
+        GameOver.SetActive(false);
+
+        //gather sprite renderer for bullets
         SpriteRenderer bulletsprite = bullets.GetComponent<SpriteRenderer>();
 
         //listen to when the button is clicked. If it is, spawn UFOs 
@@ -73,19 +90,27 @@ public class Spawner : MonoBehaviour
 
         //Define the beginning and end of waves
         wave1 = false;
-        wave2 = false;
-        wave3 = false;
-        wave4 = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        //keep track of how many UFOs are in the scene
+        Debug.Log(UFOSpawncount);
+
+        //check if the player has lost the game
+        losscondition = PlayerShipMovement.GetComponent<PlayerShipMovement>().HP;
+
+        if (losscondition < 1)
+        {
+            GameOver.SetActive(true);
+        }
+
+        //establish when the player can and cannot fire due to ammo shortage 
         float Ammo = PlayerShipMovement.GetComponent<PlayerShipMovement>().Ammo;
         bool Cannotfire = PlayerShipMovement.GetComponent<PlayerShipMovement>().Cannotfire;
         //'S' will be the spawn rate of UFOs, and will vary from wave to wave.
-
-        Debug.Log(S);
 
         if (wave1 == true)
         {
@@ -93,8 +118,12 @@ public class Spawner : MonoBehaviour
 
             if (S > 10)
             {
-                spawnUFOs();
-                S = 0;
+                if(UFOSpawncount < 10)
+                {
+                    spawnUFOs();
+                    S = 0;
+                }
+               
             }
 
         }
@@ -103,7 +132,7 @@ public class Spawner : MonoBehaviour
 
     public void spawnUFOs()
     {
-      
+        UFOSpawncount += 1;
         T = Random.Range(1, 5);
 
         //Random Roll for where UFO will spawn. Decided by T
@@ -111,8 +140,10 @@ public class Spawner : MonoBehaviour
         {
             Vector3 Spawnlocation = Spawnlocation1.transform.position;
             GameObject newUFO = Instantiate(UFO, Spawnlocation, Quaternion.identity);
-            newUFO.GetComponent<EnemyBullets>().player = player.transform;
+            newUFO.GetComponent<EnemyScript>().player = player.transform;
+            newUFO.GetComponent<EnemyScript>().playership = PlayerShipMovement;
             newUFO.GetComponent<EnemyScript>().bullets = bullets;
+            newUFO.GetComponent<EnemyScript>().Spawn = Spawn;
         }
         if (T == 2)
         {
@@ -145,5 +176,11 @@ public class Spawner : MonoBehaviour
     {
         S = 0;
         wave1 = true;
+    }
+
+    public void ReduceCount() 
+    {
+        UFOSpawncount -= 1;
+
     }
 }
